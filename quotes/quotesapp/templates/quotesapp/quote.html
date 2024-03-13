@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<form method="POST" action="{% url 'quotesapp:quote' %}">
+<form method="POST" action="{% url 'quotesapp:quotes' %}">
     {% csrf_token %}
     <div style="padding: 10px">
-        <label>Enter author details:
+        <label>Enter quote details:
             {{form.as_p}}
         </label>
 

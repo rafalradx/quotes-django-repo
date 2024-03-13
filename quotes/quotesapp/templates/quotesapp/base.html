@@ -11,14 +11,15 @@
 <main class="container">
     <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
         <ul>
-            <li><a href="/" role="button"> Go back to the main page </a></li>
+            <li><a href="/" role="button"> Home </a></li>
+            <li><a href="{% url 'quotesapp:authors' %}" role="button"> Authors </a></li>
+            <li><a href="{% url 'quotesapp:quotes' %}" role="button"> Quotes </a></li>
         </ul>
         {% if user.is_authenticated %}
         <ul>
-            <li><a href="/" role="button">Home</a></li>
-            <li><a href="{% url 'quotesapp:author' %}" role="button">Add author</a></li>
-            <li><a href="{% url 'quotesapp:quote' %}" role="button">Add quote</a></li>
-            <li><a href="{% url 'quotesapp:tag' %}" role="button">Add tag</a></li>
+            <li><a href="{% url 'quotesapp:authors' %}" role="button">Add author</a></li>
+            <li><a href="{% url 'quotesapp:quotes' %}" role="button">Add quote</a></li>
+            <li><a href="{% url 'quotesapp:tags' %}" role="button">Add tag</a></li>
         </ul>
         <ul>
             <li>Welcome <b>{{ user.username }}!</b></li>

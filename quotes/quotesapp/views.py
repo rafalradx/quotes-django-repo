@@ -7,7 +7,7 @@ def main(request):
     return render(request, "quotesapp/index.html")
 
 
-def tag(request):
+def tags(request):
     if request.method == "POST":
         form = TagForm(request.POST)
         if form.is_valid():
@@ -19,7 +19,7 @@ def tag(request):
     return render(request, "quotesapp/tag.html", {"form": TagForm()})
 
 
-def author(request):
+def authors(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
         if form.is_valid():
@@ -31,7 +31,7 @@ def author(request):
     return render(request, "quotesapp/author.html", {"form": AuthorForm()})
 
 
-def quote(request):
+def quotes(request):
     if request.method == "POST":
         form = QuoteForm(request.POST)
         if form.is_valid():

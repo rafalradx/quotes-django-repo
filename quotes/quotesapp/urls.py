@@ -5,7 +5,7 @@ app_name = "quotesapp"
 
 urlpatterns = [
     path("", views.main, name="main"),
-    path("tag/", views.tag, name="tag"),
-    path("author/", views.author, name="author"),
-    path("quote/", views.quote, name="quote"),
+    path("tags/", views.tags, name="tags"),
+    path("authors/", views.authors, name="authors"),
+    path("quotes/", views.quotes, name="quotes"),
 ]
