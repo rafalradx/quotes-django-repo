@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from quotesapp.forms import TagForm, QuoteForm
+from quotesapp.forms import QuoteForm
 from django.http import HttpResponse
 
 

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="POST" action="{% url 'quotesapp:quotes' %}">
+<form method="POST" action="{% url 'quotesapp:add' %}">
     {% csrf_token %}
     <div style="padding: 10px">
         <label>Enter quote details:

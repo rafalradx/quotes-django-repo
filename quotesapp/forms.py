@@ -10,15 +10,6 @@ from django.forms import (
 from .models import Tag, Author, Quote
 
 
-class TagForm(ModelForm):
-
-    name = CharField(min_length=3, max_length=25, widget=TextInput())
-
-    class Meta:
-        model = Tag
-        fields = ["name"]
-
-
 class QuoteForm(ModelForm):
     quote = CharField(max_length=1000, widget=TextInput())
 

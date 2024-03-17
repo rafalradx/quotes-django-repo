@@ -1,12 +1,22 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
-
+from quotesapp.models import Author, Quote
 from authors.forms import AuthorForm
 
 
 # Create your views here.
 def authors(request):
-    return HttpResponse("Authors listed")
+    authors = Author.objects.all()
+
+    return render(request, "authors/display.html", {"authors": authors})
+
+
+def details(request, author_id):
+    author = get_object_or_404(Author, pk=author_id)
+    quotes_by_author = Quote.objects.filter(author_id=author_id)
+    return render(
+        request, "authors/details.html", {"author": author, "quotes": quotes_by_author}
+    )
 
 
 def add(request):
