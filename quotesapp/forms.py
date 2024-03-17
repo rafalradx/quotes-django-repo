@@ -19,17 +19,6 @@ class TagForm(ModelForm):
         fields = ["name"]
 
 
-class AuthorForm(ModelForm):
-    fullname = CharField(max_length=255, widget=TextInput())
-    born_date = CharField(max_length=20, widget=TextInput())
-    born_location = CharField(max_length=255, widget=TextInput())
-    description = CharField(max_length=1500, widget=Textarea())
-
-    class Meta:
-        model = Author
-        fields = ["fullname", "born_date", "born_location", "description"]
-
-
 class QuoteForm(ModelForm):
     quote = CharField(max_length=1000, widget=TextInput())
 

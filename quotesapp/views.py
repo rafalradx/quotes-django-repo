@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
-from quotesapp.forms import TagForm, AuthorForm, QuoteForm
+from quotesapp.forms import TagForm, QuoteForm
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -19,19 +20,11 @@ def tags(request):
     return render(request, "quotesapp/tag.html", {"form": TagForm()})
 
 
-def authors(request):
-    if request.method == "POST":
-        form = AuthorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to="quotesapp:main")
-        else:
-            return render(request, "quotesapp/author.html", {"form": form})
-
-    return render(request, "quotesapp/author.html", {"form": AuthorForm()})
-
-
 def quotes(request):
+    return HttpResponse("List of Authors")
+
+
+def add(request):
     if request.method == "POST":
         form = QuoteForm(request.POST)
         if form.is_valid():

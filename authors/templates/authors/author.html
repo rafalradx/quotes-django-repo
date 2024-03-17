@@ -1,8 +1,8 @@
-{% extends "quotesapp/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<form method="POST" action="{% url 'quotesapp:authors' %}">
+<form method="POST" action="{% url 'authors:add' %}">
     {% csrf_token %}
     <div style="padding: 10px">
         <label>Enter author details:

@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("quotesapp.urls")),
     path("users/", include("users.urls")),
+    path("authors/", include("authors.urls")),
 ]
