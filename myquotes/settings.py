@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "quotesapp",
     "users",
     "authors",
+    "tags",
 ]
 
 MIDDLEWARE = [

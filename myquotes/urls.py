@@ -23,4 +23,5 @@ urlpatterns = [
     path("", include("quotesapp.urls")),
     path("users/", include("users.urls")),
     path("authors/", include("authors.urls")),
+    path("tags/", include("tags.urls")),
 ]
