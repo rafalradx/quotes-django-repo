@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from quotesapp.forms import QuoteForm
 from django.http import HttpResponse
 from quotesapp.models import Quote
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -12,6 +13,7 @@ def main(request):
 def quotes(request):
     quotes = Quote.objects.all()
     extracted_tags = [quote.tags.all() for quote in quotes]
+
     return render(
         request, "quotesapp/display.html", {"quotes": zip(quotes, extracted_tags)}
     )
