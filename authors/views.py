@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse
 from quotesapp.models import Author, Quote
 from authors.forms import AuthorForm
 
@@ -7,7 +6,6 @@ from authors.forms import AuthorForm
 # Create your views here.
 def authors(request):
     authors = Author.objects.all()
-
     return render(request, "authors/display.html", {"authors": authors})
 
 
