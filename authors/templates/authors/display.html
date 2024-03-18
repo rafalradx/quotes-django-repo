@@ -5,7 +5,7 @@
 {% for author in authors %}
     <ul>
         <li>
-            <a href="{% url 'authors:details' author.id %}" role="button" class="secondary">{{ author.fullname }}</a>
+            <a href="{% url 'authors:details' author.id %}" role="button" class="primary outline">{{ author.fullname }}</a>
         </li>
     </ul>
     {% endfor %}

@@ -6,9 +6,9 @@
     <ul>
         <li>
             <p>{{ quote.quote }}</p>
-            <a href="{% url 'authors:details' quote.author.id %}" role="button" class="secondary">{{ quote.author.fullname }}</a>
+            <a href="{% url 'authors:details' quote.author.id %}" role="button" class="primary outline">{{ quote.author.fullname }}</a>
             {% for tag in tags %}
-            <a href="{% url 'tags:tags' %}" role="button"># {{ tag.name }}</a>
+            <a href="{% url 'tags:details' tag.id %}" role="button" class="secondary outline"># {{ tag.name }}</a>
             {% endfor %}
 
         </li>
