@@ -13,10 +13,10 @@ def main(request):
 def quotes(request):
     quotes = Quote.objects.all()
     extracted_tags = [quote.tags.all() for quote in quotes]
-
-    return render(
-        request, "quotesapp/display.html", {"quotes": zip(quotes, extracted_tags)}
-    )
+    paginator = Paginator(list(zip(quotes, extracted_tags)), 5)
+    page = request.GET.get("page")
+    quotes_and_tags = paginator.get_page(page)
+    return render(request, "quotesapp/display.html", {"quotes": quotes_and_tags})
 
 
 def add(request):

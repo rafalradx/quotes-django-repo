@@ -1,11 +1,15 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from quotesapp.models import Author, Quote
 from authors.forms import AuthorForm
+from django.core.paginator import Paginator
 
 
 # Create your views here.
 def authors(request):
-    authors = Author.objects.all()
+    # authors = Author.objects.all()
+    paginator = Paginator(Author.objects.all(), 10)
+    page = request.GET.get("page")
+    authors = paginator.get_page(page)
     return render(request, "authors/display.html", {"authors": authors})
 
 
