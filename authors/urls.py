@@ -7,4 +7,5 @@ urlpatterns = [
     path("add/", views.add, name="add"),
     path("", views.authors, name="authors"),
     path("details/<int:author_id>", views.details, name="details"),
+    path("scrape/", views.scrape, name="scrape"),
 ]

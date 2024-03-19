@@ -2,12 +2,14 @@ from django.shortcuts import get_object_or_404, render, redirect
 from quotesapp.models import Author, Quote
 from authors.forms import AuthorForm
 from django.core.paginator import Paginator
+from scrap.scrapquotedata import scrap_author_details
+from django.http import HttpResponse
 
 
 # Create your views here.
 def authors(request):
     # authors = Author.objects.all()
-    paginator = Paginator(Author.objects.all(), 10)
+    paginator = Paginator(Author.objects.all(), 8)
     page = request.GET.get("page")
     authors = paginator.get_page(page)
     return render(request, "authors/display.html", {"authors": authors})
@@ -31,3 +33,16 @@ def add(request):
             return render(request, "authors/author.html", {"form": form})
 
     return render(request, "authors/author.html", {"form": AuthorForm()})
+
+
+def scrape(request):
+    author_details = scrap_author_details()
+    for author_scraped in author_details:
+        new_author = Author(
+            fullname=author_scraped.fullname,
+            born_date=author_scraped.born_date,
+            born_location=author_scraped.born_location,
+            description=author_scraped.description,
+        )
+        new_author.save()
+    return redirect(to="authors:authors")

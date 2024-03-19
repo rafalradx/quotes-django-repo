@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<b>Add new author below or:</b> <a href="{% url 'authors:scrape' %}" role="button" class="primary outline">Scrape authors from quotes.toscrape.com</a>
 <form method="POST" action="{% url 'authors:add' %}">
     {% csrf_token %}
     <div style="padding: 10px">
-        <label>Enter author details:
+        <label><b>Enter author details:</b>
             {{form.as_p}}
         </label>
 
