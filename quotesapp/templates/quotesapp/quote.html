@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<b>Add new quote below or:</b> <a href="{% url 'quotesapp:scrape' %}" role="button" class="primary outline">Scrape quotes from quotes.toscrape.com</a>
 <form method="POST" action="{% url 'quotesapp:add' %}">
     {% csrf_token %}
     <div style="padding: 10px">

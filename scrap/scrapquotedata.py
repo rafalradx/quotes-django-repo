@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
 
-main_url = "https://quotes.toscrape.com"
+MAIN_URL = "https://quotes.toscrape.com"
+PAGES = 10
 
 
 @dataclass
@@ -22,8 +23,8 @@ class QuoteScraped:
 
 def scrap_authors_links() -> dict[str:str]:
     authors_links = {}
-    for page_num in range(1, 11):
-        url = f"{main_url}/page/{page_num}/"
+    for page_num in range(1, PAGES + 1):
+        url = f"{MAIN_URL}/page/{page_num}/"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "lxml")
         authors = soup.find_all("small", class_="author")
@@ -41,7 +42,7 @@ def scrap_author_details() -> list[AuthorScraped]:
     authors_details = []
     authors_data = scrap_authors_links()
     for author_name, link in authors_data.items():
-        url = f"{main_url}{link}/"
+        url = f"{MAIN_URL}{link}/"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "lxml")
         author = AuthorScraped(
@@ -58,8 +59,8 @@ def scrap_author_details() -> list[AuthorScraped]:
 def scrap_quotes() -> list[QuoteScraped]:
 
     quotes_ready = []
-    for page_num in range(1, 11):
-        url = f"{main_url}/page/{page_num}/"
+    for page_num in range(1, PAGES + 1):
+        url = f"{MAIN_URL}/page/{page_num}/"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "lxml")
         quotes = soup.find_all("span", class_="text")

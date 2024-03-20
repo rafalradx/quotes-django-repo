@@ -1,8 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from quotesapp.forms import QuoteForm
 from django.http import HttpResponse
-from quotesapp.models import Quote
+from quotesapp.models import Quote, Tag, Author
 from django.core.paginator import Paginator
+from scrap.scrapquotedata import scrap_quotes
 
 
 # Create your views here.
@@ -29,3 +30,21 @@ def add(request):
             return render(request, "quotesapp/quote.html", {"form": form})
 
     return render(request, "quotesapp/quote.html", {"form": QuoteForm()})
+
+
+def scrape(request):
+    quotes = scrap_quotes()
+    for quote in quotes:
+        author = get_object_or_404(Author, fullname=quote.author)
+        try:
+            new_quote = Quote.objects.get(quote=quote.quote)
+        except Quote.DoesNotExist:
+            new_quote = Quote.objects.create(quote=quote.quote, author=author)
+            for tagname in quote.tags:
+                try:
+                    tag = Tag.objects.get(name=tagname)
+                except Tag.DoesNotExist:
+                    tag = Tag.objects.create(name=tagname)
+                new_quote.tags.add(tag)
+
+    return redirect(to="quotesapp:quotes")
