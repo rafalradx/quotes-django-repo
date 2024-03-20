@@ -13,6 +13,13 @@ class AuthorScraped:
     description: str
 
 
+@dataclass
+class QuoteScraped:
+    quote: str
+    author: str
+    tags: list[str]
+
+
 def scrap_authors_links() -> dict[str:str]:
     authors_links = {}
     for page_num in range(1, 11):
@@ -26,6 +33,7 @@ def scrap_authors_links() -> dict[str:str]:
             author_name = author.text
             if author_name not in authors_links:
                 authors_links[author_name] = quote.find("a")["href"]
+
     return authors_links
 
 
@@ -43,4 +51,29 @@ def scrap_author_details() -> list[AuthorScraped]:
             description=soup.find("div", class_="author-description").text.strip(),
         )
         authors_details.append(author)
+
     return authors_details
+
+
+def scrap_quotes() -> list[QuoteScraped]:
+
+    quotes_ready = []
+    for page_num in range(1, 11):
+        url = f"{main_url}/page/{page_num}/"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "lxml")
+        quotes = soup.find_all("span", class_="text")
+        authors = soup.find_all("small", class_="author")
+        tags = soup.find_all("div", class_="tags")
+
+        for quote, author, tag in zip(quotes, authors, tags):
+            new_quote = QuoteScraped(quote=quote.text, author=author.text, tags=[])
+            tagsforquote = tag.find_all("a", class_="tag")
+            new_quote = QuoteScraped(
+                quote=quote.text,
+                author=author.text,
+                tags=[tag.text for tag in tagsforquote],
+            )
+            quotes_ready.append(new_quote)
+
+    return quotes_ready
