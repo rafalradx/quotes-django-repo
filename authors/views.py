@@ -9,7 +9,7 @@ from django.http import HttpResponse
 # Create your views here.
 def authors(request):
     # authors = Author.objects.all()
-    paginator = Paginator(Author.objects.all(), 8)
+    paginator = Paginator(Author.objects.all().order_by("fullname"), 8)
     page = request.GET.get("page")
     authors = paginator.get_page(page)
     return render(request, "authors/display.html", {"authors": authors})

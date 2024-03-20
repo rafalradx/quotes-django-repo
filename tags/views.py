@@ -7,7 +7,7 @@ from tags.forms import TagForm
 
 # Create your views here.
 def tags(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.all().order_by("name")
     return render(request, "tags/display.html", {"tags": tags})
 
 
