@@ -4,7 +4,6 @@ from django.forms import (
     ModelMultipleChoiceField,
     ModelChoiceField,
     TextInput,
-    Textarea,
     CheckboxSelectMultiple,
 )
 from .models import Tag, Author, Quote
@@ -12,11 +11,6 @@ from .models import Tag, Author, Quote
 
 class QuoteForm(ModelForm):
     quote = CharField(max_length=1000, widget=TextInput())
-
-    # def __init__(self, *args, **kwargs):
-    #     super(QuoteForm, self).__init__(*args, **kwargs)
-    #     # Customize the author field if needed
-    #     self.fields["author"].queryset = Author.objects.all()
 
     author = ModelChoiceField(queryset=Author.objects.all())
 
@@ -26,10 +20,4 @@ class QuoteForm(ModelForm):
 
     class Meta:
         model = Quote
-        fields = ["quote", "author", "tags"]  # Include other fields if needed
-
-
-# class QuoteForm(ModelForm):
-#     quote = CharField(max_length=1000, widget=TextInput())
-#     author = ForeignKey(Author, on_delete=models.CASCADE)
-#     tags = models.ManyToManyField(Tag)
+        fields = ["quote", "author", "tags"]

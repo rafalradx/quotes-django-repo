@@ -1,12 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from quotesapp.forms import QuoteForm
-from django.http import HttpResponse
 from quotesapp.models import Quote, Tag, Author
 from django.core.paginator import Paginator
-from scrap.scrapquotedata import scrap_quotes
+from scrap.scrap_quote_data import scrap_quotes
 
 
-# Create your views here.
 def main(request):
     return render(request, "quotesapp/index.html")
 

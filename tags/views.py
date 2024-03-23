@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotFound
-
+from django.http import HttpResponseNotFound
 from quotesapp.models import Quote, Tag
 from tags.forms import TagForm
 
 
-# Create your views here.
 def tags(request):
     tags = Tag.objects.all().order_by("name")
     return render(request, "tags/display.html", {"tags": tags})
